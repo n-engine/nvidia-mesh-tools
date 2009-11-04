@@ -37,6 +37,19 @@ The NVIDIA baker tool supports some unique features not available in other simil
 
 == Detailed Pass Options ==
 
+  * *--himesh* - File name of the detailed mesh.
+  * *--hisub* - Subdivision levels applied to the detailed mesh. _Defaults to 0_.
+  * *--hidisp* - Displacement map for detailed mesh.
+  * *--hinmap* - Normal map for detailed mesh.
+  * *--hisupersampling* - Enable supersampling. _Disabled by default_.
+  * *--hipos* - Output position map.
+  * *--occlusion* - Output occlusion map.
+  * *--bentnormal* - Output bent normal map.
+  * *--rays* - Number of rays to compute ambient occlusion. _Defaults to 64_.
+  * *--maxdistratio* - Maximum occlusion distance with respect to the mesh size. _Defaults to 0.25_.
+  * *--ilmocclusion* - Use binary occlusion instead of attenuated visibility.
+  * *--hicachedir* - Directory for saving and reading the cached data.
+  * *--rebuildcache* - Load original data and recompute cache.
 
 = Implementation =
 
