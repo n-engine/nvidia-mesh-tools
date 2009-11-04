@@ -26,6 +26,15 @@ The NVIDIA baker tool supports some unique features not available in other simil
 
 == Base Pass Options ==
 
+  * *--lomesh* - File name of the base mesh.
+  * *--losub* - Subdivision levels applied to the base mesh.
+  * *--lomode* - Mode of the base mesh:
+    * 0 = Bezier ACC surface.
+    * 1 = Gregory ACC surface.
+    * 2 = Triangular mesh.
+  * *--disp3D* - Generate vector displacements.
+  * *--tangentSpace* - Generate normals and vector displacements in tangent space.
+
 == Detailed Pass Options ==
 
 
