@@ -8,8 +8,11 @@ Source code for the baker tool can be found here:
 
 http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/tools/baker
 
+The NVIDIA baker tool supports some unique features not available in other similar tools:
 
-
+  * Support for different kind of base surfaces, including various subdivision surface approximations, such as Bezier ACC, Gregory ACC, and Pm patches.
+  * Capture details using dual parameterizations instead of raycasting. This imposes some constraints on the input assets, but produces much higher quality results.
+  * Support for vector displacement maps.
 
 
 = Command-line Options =
