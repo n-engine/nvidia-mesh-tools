@@ -22,7 +22,7 @@ The NVIDIA baker tool supports some unique features not available in other simil
   * *--width* - Width of the output textures. _Defaults to 1024_.
   * *--height* - Height of the output textures. _Defaults to 1024_.
   * *--threads* - Number of threads to be used to compute ambient occlusion. _Default to 0, which chooses a number equal to the number of processors_.
-  * *--output* - File name prefix for the generated textures. Defaults to "output".
+  * *--output* - File name prefix for the generated textures. _Defaults to "output"_.
 
 == Base Pass Options ==
 
