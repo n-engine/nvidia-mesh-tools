@@ -16,9 +16,14 @@ http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/t
 
 == General Options ==
 
-  * *--width* - Width of the output textures.
-  * *--height* - Height of the output textures.
-  * *--threads* - Number of threads to be used to compute ambient occlusion. By default is equal to the number of processors
+  * *--width* - Width of the output textures. Defaults to 1024.
+  * *--height* - Height of the output textures. Defaults to 1024.
+  * *--threads* - Number of threads to be used to compute ambient occlusion. Default to 0, which chooses a number equal to the number of processors.
+  * *--output* - File name prefix for the generated textures. Defaults to "output".
+
+== Base Pass Options ==
+
+== Detailed Pass Options ==
 
 
 = Implementation =
