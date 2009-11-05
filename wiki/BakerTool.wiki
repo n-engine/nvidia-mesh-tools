@@ -75,9 +75,4 @@ The geometry image simply provides a mechanism to store these attributes, apply 
 
 == Filtering ==
 
-Several kind of filters are supported. I generally use several iterations of a quadratic extrapolation filter followed by a push-pull filter or a Voronoi filling filter.
-
-Implementation of these filters can be found here:
-
-http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvimage/HoleFilling.h
-http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvimage/HoleFilling.h
+Several kind of filters are supported. I generally use several iterations of a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvimage/HoleFilling.cpp#465 quadratic extrapolation filter] followed by a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvimage/HoleFilling.cpp#388 push-pull filter] or a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvimage/HoleFilling.cpp#153 Voronoi filling filter].
