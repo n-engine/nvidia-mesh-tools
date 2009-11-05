@@ -76,9 +76,11 @@ A base surface is not necessarily a triangular mesh. Triangular meshes are suppo
 In order to provide support for different surface types, the baker provides a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/BaseSurface.h#21 BaseSurface interface] with multiple implementations.
 
 
-== Base Mesh Pass ==
+== Base Pass ==
 
-== Detail Mesh Pass ==
+
+== Detail Pass ==
+
 
 == Filtering ==
 
