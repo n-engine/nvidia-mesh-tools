@@ -1,5 +1,4 @@
 #summary Baker Tool Overview
-#labels Phase-Implementation
 
 = Introduction =
 
@@ -79,17 +78,26 @@ In order to provide support for different surface types, the baker provides a [h
 
 == Rasterization ==
 
-In order to store mesh attributes in texture space the baker uses a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/raster simple rasterizer]. The rasterizer only supports affine interpolation, because texture interpolation is usually linear (you can approximate non linear interpolation using tessellation/subdivision). Mesh triangles do not overlap in texture space, since the texture parameterization must be unique. However, if there's any overlap, contributions from both sources are simply added together and averaged. In order to provide high quality anti-aliasing the rasterizer performs analytic estimation of coverage by clipping the triangle to each texel in order to evaluate the area of their intersection. In addition to that, it can optionally perform supersampling although that's usually not needed.
+In order to store mesh attributes in texture space the baker uses a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/raster simple rasterizer]. The rasterizer supports rendering of triangles and quads using linear or bilinear interpolation (you can approximate non linear interpolation using tessellation/subdivision). The texture parameterization should be unique, so that polygons do not overlap in texture space. However, if there's any overlap, contributions from both sources can be added together and averaged. 
+
+In order to provide high quality anti-aliasing the rasterizer performs analytic estimation of coverage by clipping the triangle to each texel in order to evaluate the area of their intersection. In addition to that, it can optionally perform supersampling although that's usually not needed.
 
 The rasterizer does not support shaders, but instead you can provide a callback function that is invoked on every texel and that allows you to perform arbitrary operations, like sampling surfaces at certain parametric locations or writing the result to textures. The rasterizer does not output anything, it simply invokes the callback.
 
 
+== Detail Pass ==
+
+During the detail mesh pass the detail mesh is loaded and rasterized. On every texel the abstract base surface is evaluated and the surface attributes are stored in the base geometry image. This is done by the [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/Samplers.h#19 GeometrySampler], which is a class that provides a callback to the rasterizer. After rasterization, the geometry image is filtered to extrapolate the sampled texels to the empty ones. The [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/DetailedMeshPass.h  DetailMeshPass class] coordinates all these steps.
+
+
+== Ambient Occlusion ==
+
+After the detail mesh pass, ambient occlusion can be evaluated, this is done by raytracing rays with a montecarlo distribution for every texel of the geometry image. Raytracing is performed using a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/kdtree kd-tree acceleration structure]. The geometry image is [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/TiledTask.h divided into tiles] and multiple threads are used to process these tiles.
+
+
 == Base Pass ==
 
-During the base pass the base mesh is loaded and rasterized. On every texel the abstract base surface is evaluated and the surface attributes are stored in the base geometry image. This is done by the [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/Samplers.h#19 GeometrySampler], which is a class that provides a callback to the rasterizer. After rasterization, the geometry image is filtered to extrapolate the sampled texels to the empty ones. The [[http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/BaseMeshPass.h  BaseMeshPass class] coordinates all these steps.
-
-
-== Detail Pass ==
+The base mesh pass takes a base mesh and the geometry image generated during the detail mesh pass. Then it rasterizes the base surface using the [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/Samplers.h#44 DisplacementSampler]. Despite its name this sampler does more than computing displacements, it also transforms normals from object space to tangent space. The [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/BaseMeshPass.h BaseMeshPass] coordinates these steps.
 
 
 == Filtering ==
