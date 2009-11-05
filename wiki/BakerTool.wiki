@@ -53,7 +53,19 @@ The NVIDIA baker tool supports some unique features not available in other simil
 
 = Implementation =
 
+The baker tool generally loads two meshes, a high resolution detailed mesh and a low resolution base mesh. These two meshes must have the same parameterization. That is, if you rasterize the two meshes in texture space, the output of the two meshes should overlap almost exactly.
+
+The baker tool, relies on this dual parameterization in order to transfer attributes from one mesh to the other.
+
+
 == Geometry Image ==
+
+The GeometryImage class is just a wrapper over a floating point image. It simply provides some constructors to allocate an image with the appropriate number of channels, and some accessors to easily access these channels.
+
+Two geometry images are used in the baker tool. The detailed mesh pass generates a geometry image that contains position and normal attributes that are both in object space. The base mesh pass generates a geometry image with position and normal attributes too, but in addition to that it also generates displacement maps and tangent space normal maps.
+
+The geometry image simply provides a mechanism to store these attributes, apply some filtering to them and save them to disk.
+
 
 == Base Surface ==
 
