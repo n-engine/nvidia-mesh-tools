@@ -1,4 +1,5 @@
 #summary Baker Tool Overview
+#labels Phase-Implementation
 
 = Introduction =
 
@@ -78,7 +79,7 @@ In order to provide support for different surface types, the baker provides a [h
 
 == Rasterization ==
 
-In order to store mesh attributes in texture space the baker uses a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/raster simple rasterizer]. The rasterizer only supports affine interpolation, because texture interpolation is always linear. Mesh triangles do not overlap in texture space, since the texture parameterization must be unique. However, if there's any overlap, contributions from both sources are simply added together and averaged. In order to provide high quality anti-aliasing the rasterizer performs analytic estimation of coverage by clipping the triangle to each texel in order to evaluate the area of their intersection. In addition to that, it can optionally perform supersampling although that's usually not needed.
+In order to store mesh attributes in texture space the baker uses a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/raster simple rasterizer]. The rasterizer only supports affine interpolation, because texture interpolation is usually linear (you can approximate non linear interpolation using tessellation/subdivision). Mesh triangles do not overlap in texture space, since the texture parameterization must be unique. However, if there's any overlap, contributions from both sources are simply added together and averaged. In order to provide high quality anti-aliasing the rasterizer performs analytic estimation of coverage by clipping the triangle to each texel in order to evaluate the area of their intersection. In addition to that, it can optionally perform supersampling although that's usually not needed.
 
 The rasterizer does not support shaders, but instead you can provide a callback function that is invoked on every texel and that allows you to perform arbitrary operations, like sampling surfaces at certain parametric locations or writing the result to textures. The rasterizer does not output anything, it simply invokes the callback.
 
