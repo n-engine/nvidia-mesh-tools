@@ -4,7 +4,7 @@
 
 The baker tool is a command-line tool that allows you to capture detail attributes from high resolution meshes and bake them into textures, so that they can be applied to lower resolution surfaces.
 
-Source code for the baker tool can be found here:
+You can browse the source code of the baker tool here:
 
 http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/tools/baker
 
