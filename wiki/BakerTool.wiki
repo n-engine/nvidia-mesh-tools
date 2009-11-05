@@ -53,9 +53,11 @@ The NVIDIA baker tool supports some unique features not available in other simil
 
 = Implementation =
 
-The baker tool generally loads two meshes, a high resolution detailed mesh and a low resolution base mesh. These two meshes must have the same parameterization. That is, if you rasterize the two meshes in texture space, the output of the two meshes should overlap almost exactly.
+The baker tool generally loads two meshes, a high resolution _detailed_ mesh and a low resolution _base_ mesh. These two meshes must have the same parameterization. That is, if you rasterize the two meshes in texture space, the output of the two meshes should overlap almost exactly.
 
 The baker tool, relies on this dual parameterization in order to transfer attributes from one mesh to the other.
+
+This is done in two passes. First, in the detailed mesh pass the detailed mesh is loaded and rasterized into a geometry image. Then, in the base mesh pass the base mesh is loaded, rasterized into another geometry image. During the second step, the two geometry images are compared and some attributes are transferred or transformed from the detailed geometry image to the base geometry image. Finally, the attributes stored in both of the geometry images are filtered and stored to disk.
 
 
 == Geometry Image ==
@@ -68,6 +70,11 @@ The geometry image simply provides a mechanism to store these attributes, apply 
 
 
 == Base Surface ==
+
+A base surface is not necessarily a triangular mesh. Triangular meshes are supported, several methods to evaluate the positions, normals and tangent space of the triangular mesh are available. In addition to triangular meshes the baker tool also has support for approximate subdivision surfaces. This is important, because when sampling displacements the distance from the base mesh to the detailed mesh must take the evaluation method into account.
+
+In order to provide support for different surface types, the baker provides a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/BaseSurface.h#21 BaseSurface interface] with multiple implementations.
+
 
 == Base Mesh Pass ==
 
