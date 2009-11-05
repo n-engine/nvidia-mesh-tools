@@ -62,7 +62,7 @@ This is done in two passes. First, in the detailed mesh pass the detailed mesh i
 
 == Geometry Image ==
 
-The !GeometryImage class is just a wrapper over a floating point image. It simply provides some constructors to allocate an image with the appropriate number of channels, and some accessors to easily access these channels.
+The [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/GeometryImage.h#14 GeometryImage class] is just a wrapper over a floating point image. It simply provides some constructors to allocate an image with the appropriate number of channels, and some accessors to easily access these channels.
 
 Two geometry images are used in the baker tool. The detailed mesh pass generates a geometry image that contains position and normal attributes that are both in object space. The base mesh pass generates a geometry image with position and normal attributes too, but in addition to that it also generates displacement maps and tangent space normal maps.
 
