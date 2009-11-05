@@ -76,7 +76,13 @@ A base surface is not necessarily a triangular mesh. Triangular meshes are suppo
 In order to provide support for different surface types, the baker provides a [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/BaseSurface.h#21 BaseSurface interface] with multiple implementations.
 
 
+== Rasterization ==
+
+In order to store mesh attributes in texture space the baker uses a [http://code.google.com/p/nvidia-mesh-tools/source/browse/#svn/trunk/src/nvmesh/raster simple rasterizer]. The rasterizer only supports affine interpolation, because texture interpolation is always linear. Mesh triangles do not overlap in texture space, since the texture parameterization must be unique. If there's an overlap, contributions from both sources are added together. In order to provide high quality anti-aliasing the rasterizer performs analytic estimation of coverage by clipping the triangle to the texel in order to evaluate the area of the intersection. In addition to that, it can optionally perform supersampling although that's usually not needed.
+
+
 == Base Pass ==
+
 
 
 == Detail Pass ==
