@@ -87,7 +87,7 @@ The rasterizer does not support shaders, but instead you can provide a callback 
 
 == Detail Pass ==
 
-During the detail mesh pass the detail mesh is loaded and rasterized. On every texel the abstract base surface is evaluated and the surface attributes are stored in the base geometry image. This is done by the [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/Samplers.h#19 GeometrySampler], which is a class that provides a callback to the rasterizer. After rasterization, the geometry image is filtered to extrapolate the sampled texels to the empty ones. The [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/DetailedMeshPass.h  DetailMeshPass class] coordinates all these steps.
+During the detail mesh pass the detail mesh is loaded and rasterized. On every texel the detailed triangular mesh is evaluated and the surface attributes are stored in the base geometry image. This is done by the [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/Samplers.h#19 GeometrySampler], which is a class that provides a callback to the rasterizer. After rasterization, the geometry image is filtered to extrapolate the sampled texels to the empty ones. The [http://code.google.com/p/nvidia-mesh-tools/source/browse/trunk/src/nvmesh/tools/baker/DetailedMeshPass.h  DetailMeshPass class] coordinates all these steps.
 
 
 == Ambient Occlusion ==
